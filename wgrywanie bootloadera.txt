@@ -1,0 +1,1 @@
+avrdude -p atxmega32a4 -P usb -c avrispmkII -U fuse2:w:0xBF:m  -e -U boot:w:bootloader.prebuilt.hex

@@ -36,20 +36,28 @@ void Send1CharFrame(char buffer){
 	SendChar(buffer);
 	SendChar(FRAME_ENDING);
 }
+void SendString(char* str){
+	for(int i=0;str[i]!='\0' && i < 140; i++){
+		SendChar(str[i]);
+	}
+}
 
 char ReceiveChar(){
-	/*if (USARTE0.DATA == 0x1B){
-		CCP = CCP_IOREG_gc;
-		RST.CTRL = RST_SWRST_bm;
-	}*/
 	int timeoutCounter = 0;
 	while(!(USARTE0.STATUS & USART_RXCIF_bm)){
 		if(TIMEOUT <= timeoutCounter++){
-			SendFrame(ERROR_RC_TIMEOUT);
-			return ERROR_CHAR;
+			//SendFrame(ERROR_RC_TIMEOUT);
+			//return ERROR_CHAR;
 		}
 	}
 	return USARTE0.DATA;
+}
+void ReceiveNChars(char *buffer, char countOfChars){
+	if(countOfChars == 0)
+	return;
+	for(int i = 0; i<countOfChars; i++){
+		buffer[i] = ReceiveChar();
+	}
 }
 void ReceiveFrame(){
 	char receivedChar = ReceiveChar();

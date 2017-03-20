@@ -12,11 +12,13 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include <string.h>
+#include <stdlib.h>
 //#include <avr/iox32a4u.h>
 #include "def.h"
-
+typedef enum {HIGH,LOW} state;
 char frameReceiveBuffer[FRAME_CHAR_MAX];
 #include "usart.c"
+#include "radio.c"
 
 
 
@@ -70,12 +72,45 @@ int main (void)
 	ledShortTick();
 	//board_init();
 	UsartInit();
+	radioInit();
 	
+	char command;
+	char len;
+	char *data;
+	char *buffer;
+
+	Send("Set command mode\n",17);
+	SetRadioConfigPinLow();
+	SetRadioConfigPinHigh();
+	//SendCommandToRadio(0x44,0x01,0x10);
+	ReceiveFrameFromRadio(radioFrameReceiveBuffer);
+	SendString("Odpowiedz CM: ");
+	SendRadioFrameToPc();
+	SendString(":END\n");
 
 	while(1)
 	{
-		SendChar('A');
+		//SendFrame("Podaj komende dla radia: ");
+		//command = ReceiveChar();
+		//SendFrame("Podaj ilosc bajtow danych: ");
+		//len = ReceiveChar();
+		//SendFrame("Podaj dane: ");
+		//data = (char*)malloc(len);
+		//ReceiveNChars(data,len);
+		//free(data);
+		
 		ledLongTick();
+
+		Send("Ask for serial number\n",22);
+		SendCommandToRadio(0x0b,0x00,0x00);
+		ReceiveFrameFromRadio(radioFrameReceiveBuffer);
+		SendString("Odpowiedz: ");
+		SendRadioFrameToPc();
+		SendString(":END\n");
+		//Send(BufferToHexAscii(radioFrameReceiveBuffer, radioFrameReceiveBuffer[2]+4),(radioFrameReceiveBuffer[2]+4)*3+1);
+		ledLongTick();
+
+	
 	}
 	
 	/* Insert application code here, after the board has been initialized. */

@@ -8,6 +8,8 @@ d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4
                               src/main.o (__do_copy_data)
 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega2\libgcc.a(_clear_bss.o)
                               src/main.o (__do_clear_bss)
+d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega2\libc.a(malloc.o)
+                              src/main.o (malloc)
 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega2\libc.a(memcpy.o)
                               src/ASF/xmega/drivers/nvm/nvm.o (memcpy)
 
@@ -15,6 +17,10 @@ Allocating common symbols
 Common symbol       size              file
 
 frameReceiveBuffer  0x64              src/main.o
+__brkval            0x2               d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega2\libc.a(malloc.o)
+radioFrameReceiveBuffer
+                    0x2               src/main.o
+__flp               0x2               d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega2\libc.a(malloc.o)
 
 Discarded input sections
 
@@ -774,20 +780,27 @@ Discarded input sections
  .group         0x00000000        0x8 src/main.o
  .group         0x00000000        0x8 src/main.o
  .group         0x00000000        0x8 src/main.o
+ .group         0x00000000        0x8 src/main.o
+ .group         0x00000000        0x8 src/main.o
+ .group         0x00000000        0x8 src/main.o
+ .group         0x00000000        0x8 src/main.o
  .text          0x00000000        0x0 src/main.o
  .data          0x00000000        0x0 src/main.o
  .bss           0x00000000        0x0 src/main.o
- .text.Send     0x00000000       0x2c src/main.o
- .text.SendFrame
-                0x00000000       0x48 src/main.o
  .text.Send1CharFrame
                 0x00000000       0x1a src/main.o
- .rodata.str1.1
-                0x00000000       0x38 src/main.o
  .text.ReceiveChar
-                0x00000000       0x26 src/main.o
+                0x00000000       0x10 src/main.o
+ .text.ReceiveNChars
+                0x00000000       0x2e src/main.o
  .text.ReceiveFrame
                 0x00000000       0x4c src/main.o
+ .text.SetRadioConfigPinLow
+                0x00000000        0x8 src/main.o
+ .text.SetRadioConfigPinHigh
+                0x00000000        0x8 src/main.o
+ .text.GetRadioRtsPinState
+                0x00000000        0x8 src/main.o
  .debug_macro   0x00000000      0xa60 src/main.o
  .debug_macro   0x00000000       0x10 src/main.o
  .debug_macro   0x00000000      0x1c9 src/main.o
@@ -802,7 +815,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x5e src/main.o
  .debug_macro   0x00000000       0x69 src/main.o
  .debug_macro   0x00000000       0x16 src/main.o
- COMMON         0x00000000       0x64 src/main.o
+ .debug_macro   0x00000000       0x1c src/main.o
  .text          0x00000000        0x0 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega2\libgcc.a(_udivmodsi4.o)
  .data          0x00000000        0x0 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega2\libgcc.a(_udivmodsi4.o)
  .bss           0x00000000        0x0 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega2\libgcc.a(_udivmodsi4.o)
@@ -867,6 +880,8 @@ Discarded input sections
                 0x00000000        0x0 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega2\libgcc.a(_clear_bss.o)
  .text.libgcc.fixed
                 0x00000000        0x0 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega2\libgcc.a(_clear_bss.o)
+ .text          0x00000000        0x0 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega2\libc.a(malloc.o)
+ .bss           0x00000000        0x0 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega2\libc.a(malloc.o)
  .text          0x00000000        0x0 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega2\libc.a(memcpy.o)
  .data          0x00000000        0x0 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega2\libc.a(memcpy.o)
  .bss           0x00000000        0x0 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega2\libc.a(memcpy.o)
@@ -1006,7 +1021,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x348
+.text           0x00000000      0x972
  *(.vectors)
  .vectors       0x00000000      0x1fc D:/Atmel Studio 7.0/7.0/Packs/atmel/XMEGAA_DFP/1.1.68/gcc/dev/atxmega32a4u/avrxmega2/crtatxmega32a4u.o
                 0x00000000                __vector_default
@@ -1200,26 +1215,68 @@ END GROUP
  .text.SendChar
                 0x0000026e       0x10 src/main.o
                 0x0000026e                SendChar
+ .text.Send     0x0000027e       0x2a src/main.o
+                0x0000027e                Send
+ .text.SendFrame
+                0x000002a8       0x42 src/main.o
+                0x000002a8                SendFrame
+ .text.SendString
+                0x000002ea       0x32 src/main.o
+                0x000002ea                SendString
+ .text.BufferClear
+                0x0000031c       0x18 src/main.o
+                0x0000031c                BufferClear
+ .text.radioInit
+                0x00000334       0x64 src/main.o
+                0x00000334                radioInit
+ .text.SendCharToRadio
+                0x00000398       0x10 src/main.o
+                0x00000398                SendCharToRadio
+ .text.SendBufferToRadio
+                0x000003a8       0x2a src/main.o
+                0x000003a8                SendBufferToRadio
+ .text.SendCommandToRadio
+                0x000003d2       0x76 src/main.o
+                0x000003d2                SendCommandToRadio
+ .text.ReceiveCharFromRadio
+                0x00000448       0x28 src/main.o
+                0x00000448                ReceiveCharFromRadio
+ .text.ReceiveFrameFromRadio
+                0x00000470       0xd6 src/main.o
+                0x00000470                ReceiveFrameFromRadio
+ .text.hexToChar
+                0x00000546        0xc src/main.o
+                0x00000546                hexToChar
+ .text.BufferToHexAscii
+                0x00000552       0xa8 src/main.o
+                0x00000552                BufferToHexAscii
+ .text.SendRadioFrameToPc
+                0x000005fa       0x14 src/main.o
+                0x000005fa                SendRadioFrameToPc
  .text.XtalInit
-                0x0000027e       0x38 src/main.o
-                0x0000027e                XtalInit
- .text.delay    0x000002b6       0x14 src/main.o
-                0x000002b6                delay
- .text.ledInit  0x000002ca        0xc src/main.o
-                0x000002ca                ledInit
+                0x0000060e       0x38 src/main.o
+                0x0000060e                XtalInit
+ .text.delay    0x00000646       0x14 src/main.o
+                0x00000646                delay
+ .text.ledInit  0x0000065a        0xc src/main.o
+                0x0000065a                ledInit
  .text.ledShortTick
-                0x000002d6       0x2a src/main.o
-                0x000002d6                ledShortTick
+                0x00000666       0x2a src/main.o
+                0x00000666                ledShortTick
  .text.ledLongTick
-                0x00000300       0x2a src/main.o
-                0x00000300                ledLongTick
- .text.main     0x0000032a       0x1a src/main.o
-                0x0000032a                main
-                0x00000344                . = ALIGN (0x2)
+                0x00000690       0x2a src/main.o
+                0x00000690                ledLongTick
+ .text.main     0x000006ba       0x72 src/main.o
+                0x000006ba                main
+ .text.avr-libc
+                0x0000072c      0x242 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega2\libc.a(malloc.o)
+                0x0000072c                malloc
+                0x0000085c                free
+                0x0000096e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000344        0x0 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega2\libgcc.a(_exit.o)
-                0x00000344                _exit
-                0x00000344                exit
+ .fini9         0x0000096e        0x0 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega2\libgcc.a(_exit.o)
+                0x0000096e                _exit
+                0x0000096e                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -1238,36 +1295,52 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000344        0x4 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega2\libgcc.a(_exit.o)
+ .fini0         0x0000096e        0x4 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega2\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000348                _etext = .
+                0x00000972                _etext = .
 
-.data           0x00802000        0x0 load address 0x00000348
+.data           0x00802000       0xa8 load address 0x00000972
                 0x00802000                PROVIDE (__data_start, .)
  *(.data)
+ .data          0x00802000        0x6 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega2\libc.a(malloc.o)
+                0x00802000                __malloc_heap_end
+                0x00802002                __malloc_heap_start
+                0x00802004                __malloc_margin
  *(.data*)
  *(.rodata)
  *(.rodata*)
+ .rodata.str1.1
+                0x00802006       0xa1 src/main.o
  *(.gnu.linkonce.d*)
-                0x00802000                . = ALIGN (0x2)
-                0x00802000                _edata = .
-                0x00802000                PROVIDE (__data_end, .)
+                0x008020a8                . = ALIGN (0x2)
+ *fill*         0x008020a7        0x1 
+                0x008020a8                _edata = .
+                0x008020a8                PROVIDE (__data_end, .)
 
-.bss            0x00802000        0x0
-                0x00802000                PROVIDE (__bss_start, .)
+.bss            0x008020a8       0x6b
+                0x008020a8                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
+ .bss.radioTimeoutFlag
+                0x008020a8        0x1 src/main.o
+                0x008020a8                radioTimeoutFlag
  *(COMMON)
-                0x00802000                PROVIDE (__bss_end, .)
-                0x00000348                __data_load_start = LOADADDR (.data)
-                0x00000348                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008020a9       0x66 src/main.o
+                0x008020a9                frameReceiveBuffer
+                0x0080210d                radioFrameReceiveBuffer
+ COMMON         0x0080210f        0x4 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega2\libc.a(malloc.o)
+                0x0080210f                __brkval
+                0x00802111                __flp
+                0x00802113                PROVIDE (__bss_end, .)
+                0x00000972                __data_load_start = LOADADDR (.data)
+                0x00000a1a                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00802000        0x0
+.noinit         0x00802113        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00802000                _end = .
-                [!provide]                PROVIDE (__heap_start, .)
+                0x00802113                _end = .
+                0x00802113                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -1310,6 +1383,7 @@ END GROUP
  *(.comment)
  .comment       0x00000000       0x30 src/main.o
                                  0x31 (size before relaxing)
+ .comment       0x00000030       0x31 d:/atmel studio 7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega2\libc.a(malloc.o)
 
 .note.gnu.avr.deviceinfo
                 0x00000000       0x40
@@ -1331,42 +1405,42 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0x80
+.debug_aranges  0x00000000       0xf8
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x80 src/main.o
+                0x00000000       0xf8 src/main.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x3075
+.debug_info     0x00000000     0x3765
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000     0x284f D:/Atmel Studio 7.0/7.0/Packs/atmel/XMEGAA_DFP/1.1.68/gcc/dev/atxmega32a4u/avrxmega2/crtatxmega32a4u.o
- .debug_info    0x0000284f      0x826 src/main.o
+ .debug_info    0x0000284f      0xf16 src/main.o
 
-.debug_abbrev   0x00000000     0x2894
+.debug_abbrev   0x00000000     0x297f
  *(.debug_abbrev)
  .debug_abbrev  0x00000000     0x262c D:/Atmel Studio 7.0/7.0/Packs/atmel/XMEGAA_DFP/1.1.68/gcc/dev/atxmega32a4u/avrxmega2/crtatxmega32a4u.o
- .debug_abbrev  0x0000262c      0x268 src/main.o
+ .debug_abbrev  0x0000262c      0x353 src/main.o
 
-.debug_line     0x00000000      0x91e
+.debug_line     0x00000000      0xd6a
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x391 D:/Atmel Studio 7.0/7.0/Packs/atmel/XMEGAA_DFP/1.1.68/gcc/dev/atxmega32a4u/avrxmega2/crtatxmega32a4u.o
- .debug_line    0x00000391      0x58d src/main.o
+ .debug_line    0x00000391      0x9d9 src/main.o
 
-.debug_frame    0x00000000      0x144
+.debug_frame    0x00000000      0x2fc
  *(.debug_frame)
- .debug_frame   0x00000000      0x144 src/main.o
+ .debug_frame   0x00000000      0x2fc src/main.o
 
-.debug_str      0x00000000    0x19cdd
+.debug_str      0x00000000    0x1a113
  *(.debug_str)
  .debug_str     0x00000000     0x1aa8 D:/Atmel Studio 7.0/7.0/Packs/atmel/XMEGAA_DFP/1.1.68/gcc/dev/atxmega32a4u/avrxmega2/crtatxmega32a4u.o
- .debug_str     0x00001aa8    0x18235 src/main.o
-                              0x1875a (size before relaxing)
+ .debug_str     0x00001aa8    0x1866b src/main.o
+                              0x18bb1 (size before relaxing)
 
-.debug_loc      0x00000000      0x3d5
+.debug_loc      0x00000000      0xc7f
  *(.debug_loc)
- .debug_loc     0x00000000      0x3d5 src/main.o
+ .debug_loc     0x00000000      0xc7f src/main.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1386,18 +1460,21 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x88
+.debug_ranges   0x00000000      0x100
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x88 src/main.o
+ .debug_ranges  0x00000000      0x100 src/main.o
 
-.debug_macro    0x00000000      0x47b
+.debug_macro    0x00000000      0x5a8
  *(.debug_macro)
- .debug_macro   0x00000000       0xe0 src/main.o
- .debug_macro   0x000000e0       0x10 src/main.o
- .debug_macro   0x000000f0      0x166 src/main.o
- .debug_macro   0x00000256       0x97 src/main.o
- .debug_macro   0x000002ed       0x10 src/main.o
- .debug_macro   0x000002fd      0x17e src/main.o
+ .debug_macro   0x00000000      0x100 src/main.o
+ .debug_macro   0x00000100       0x10 src/main.o
+ .debug_macro   0x00000110      0x166 src/main.o
+ .debug_macro   0x00000276       0x97 src/main.o
+ .debug_macro   0x0000030d       0x10 src/main.o
+ .debug_macro   0x0000031d       0x97 src/main.o
+ .debug_macro   0x000003b4       0x5a src/main.o
+ .debug_macro   0x0000040e      0x17e src/main.o
+ .debug_macro   0x0000058c       0x1c src/main.o
 OUTPUT(atxboot.elf elf32-avr)
 LOAD linker stubs
 

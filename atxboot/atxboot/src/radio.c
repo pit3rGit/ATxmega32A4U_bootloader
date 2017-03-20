@@ -1,12 +1,17 @@
 #define USART_RADIO USARTD0
-#define RADIO_TIMEOUT 10000
+#define RADIO_TIMEOUT 30000
 //#define RADIO_ERROR_CHAR 0x00
 #define RADIO_FRAME_START 0x02
-#define RADIO_FRAME_CHAR_MAX 140
+#define RADIO_FRAME_SIZE_MAX 140
 
 char radioTimeoutFlag = 0;
-char radioFrameReceiveBuffer[RADIO_FRAME_CHAR_MAX];
+char *radioFrameReceiveBuffer;
 
+void BufferClear(char* buffer,char size){
+	for(int i=0;i<size;i++){
+		buffer[i] = 0;
+	}
+}
 void radioInit(){
 	//USART PORT D
 	PORTD_DIRSET = PIN3_bm;
@@ -31,9 +36,25 @@ void radioInit(){
 
 	//RESET
 	PORTD_DIRSET = PIN6_bm;
+	PORTD_OUTSET = PIN6_bm;
 
 	//CONFIG
 	PORTD_DIRSET = PIN7_bm;
+	PORTD_OUTSET = PIN7_bm;
+
+	radioFrameReceiveBuffer = (char*)malloc(RADIO_FRAME_SIZE_MAX);
+}
+void SetRadioConfigPinLow(){
+	PORTD_OUTCLR = PIN7_bm;
+}
+void SetRadioConfigPinHigh(){
+	PORTD_OUTSET = PIN7_bm;
+}
+state GetRadioRtsPinState(){
+	if(PIN5_bm == PORTD.IN & PIN5_bm)
+		return HIGH;
+	else
+		return LOW;
 }
 void SendCharToRadio(char charToSend){
 	while(!(USART_RADIO.STATUS & USART_DREIF_bm));
@@ -45,7 +66,7 @@ void SendBufferToRadio(char *buffer, int length){
 	}
 }
 void SendCommandToRadio(char command,char length, char *data){
-	char buffer[RADIO_FRAME_CHAR_MAX];
+	char buffer[RADIO_FRAME_SIZE_MAX];
 	char checksum;
 	buffer[0] = 0x02;
 	buffer[1] = command;
@@ -56,7 +77,10 @@ void SendCommandToRadio(char command,char length, char *data){
 		checksum ^= buffer[i+3];
 	}
 	buffer[length+3] = checksum;
+	//SetRadioConfigPinLow();
+	//SetRadioConfigPinHigh();
 	SendBufferToRadio(buffer,length+4);
+	//SetRadioConfigPinHigh();
 }
 char ReceiveCharFromRadio(){
 	int timeoutCounter = 0;
@@ -69,26 +93,68 @@ char ReceiveCharFromRadio(){
 	}
 	return USART_RADIO.DATA;
 }
-void ReceiveFrameFromRadio(){
+void ReceiveFrameFromRadio(char *buffer){
+	BufferClear(buffer,140);
 	char receivedChar = ReceiveCharFromRadio();
-	radioFrameReceiveBuffer[0];
+	if(radioTimeoutFlag){
+		SendString("TimeoutStartChar\n");
+		return;
+	}
+	buffer[0]=receivedChar;
 	if(RADIO_FRAME_START == receivedChar){
+		SendFrame("0x02");
 		char command = ReceiveCharFromRadio();
-		radioFrameReceiveBuffer[1];
+		if(radioTimeoutFlag){
+			SendString("TimeoutC\n");
+			return;
+		}
+		buffer[1] = command;
 		char length = ReceiveCharFromRadio();
-		radioFrameReceiveBuffer[2];
+		if(radioTimeoutFlag){
+			SendString("TimeoutL\n");
+			return;
+		}
+		buffer[2] = length;
 		char radioFrameBufferIterator = 3;
 		for(int i=0; i<length; i++){
 			receivedChar = ReceiveCharFromRadio();
-			if(radioTimeoutFlag)
+			if(radioTimeoutFlag){
+				SendString("TimeoutD\n");
 				break;
-			radioFrameReceiveBuffer[radioFrameBufferIterator++] = receivedChar;
-			if(radioFrameBufferIterator > RADIO_FRAME_CHAR_MAX){
-				//SendFrame(ERROR_TO_LONG_FRAME);
+			}
+				
+			buffer[radioFrameBufferIterator++] = receivedChar;
+			if(radioFrameBufferIterator > RADIO_FRAME_SIZE_MAX){
 				break;
 			}
 		}
 		char checksum = ReceiveCharFromRadio();
-		frameReceiveBuffer[radioFrameBufferIterator] = checksum;
+		if(radioTimeoutFlag){
+			SendString("TimeoutCRC\n");
+			return;
+		}
+		buffer[radioFrameBufferIterator] = checksum;
 	}
 }
+char hexToChar(char hex){
+	if(hex<10)
+	return hex+'0';
+	else{
+		return (hex-10+'A');
+	}
+}
+char *BufferToHexAscii(char *buffer, char bufferSize){
+	char *hexBuffer = (char*)malloc(bufferSize*3+1);
+	int j = 0;
+	for(int i=0; i<bufferSize; i++){
+		hexBuffer[j++] = '|';
+		hexBuffer[j++] = hexToChar(buffer[i]>>4);
+		hexBuffer[j++] = hexToChar(buffer[i] & 0x0f);
+	}
+	hexBuffer[j] = '\0';
+	return hexBuffer;
+}
+void SendRadioFrameToPc(){
+	SendString(BufferToHexAscii(radioFrameReceiveBuffer, radioFrameReceiveBuffer[2]+4));
+}
+

@@ -17,7 +17,8 @@ src/main.d src/main.o: ../src/main.c \
  d:\atmel\ studio\ 7.0\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  d:\atmel\ studio\ 7.0\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
  d:\atmel\ studio\ 7.0\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
- ../src/def.h ../src/usart.c
+ d:\atmel\ studio\ 7.0\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
+ ../src/def.h ../src/usart.c ../src/radio.c
 
 d:\atmel\ studio\ 7.0\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -55,6 +56,10 @@ d:\atmel\ studio\ 7.0\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h
 
 d:\atmel\ studio\ 7.0\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
+d:\atmel\ studio\ 7.0\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
+
 ../src/def.h:
 
 ../src/usart.c:
+
+../src/radio.c:
